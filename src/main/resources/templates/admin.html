@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrador - Educational Harmonie</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #C6DFF3;
+            color: #143C5F;
+            position: relative;
+        }
+        .header-bar {
+            background-color: #143C5F;
+            color: white;
+            padding: 10px 0;
+        }
+        .container-fluid {
+            text-align: center;
+            padding: 0;
+        }
+        .sidebar {
+            background-color: white;
+            width: 250px;
+            padding: 20px;
+            border-right: 1px solid #2878BD;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+        }
+        .sidebar .menu-btn, .sidebar .menu-item {
+            width: 100%;
+            text-align: left;
+            font-size: 16px;
+            color: #143C5F;
+            padding: 10px 15px;
+            border: 1px solid #2878BD;
+            background-color: #C6DFF3;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+        .sidebar .menu-btn:hover, .sidebar .menu-item:hover {
+            background-color: #70B0E0;
+            color: white;
+        }
+        .sidebar .menu-icon {
+            font-size: 20px;
+        }
+        .content-area {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        .profile-section {
+            text-align: right;
+            padding: 20px;
+        }
+        .profile-section .profile-icon {
+            font-size: 30px;
+            color: #143C5F;
+        }
+        .profile-section p {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #2878BD;
+        }
+        .logout {
+            text-align: center;
+            padding: 20px;
+            cursor: pointer;
+            color: #143C5F;
+        }
+        .logout:hover {
+            color: #2878BD;
+        }
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+            opacity: 0.2;
+            pointer-events: none;
+        }
+        .watermark img {
+            max-width: 80%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="watermark">
+    <img src="../static/img/logo.JPG.jpg" alt="Logo de Educational Harmonie" class="logo">
+</div>
+
+<div class="header-bar">
+    <div class="container-fluid">
+        <h1>PANEL ADMINISTRADOR</h1>
+    </div>
+</div>
+
+<div class="d-flex">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo-container text-center mb-4">
+            <div class="logo-placeholder" style="background-color: #70B0E0; color: white; padding: 20px;"></div>
+            <span class="fw-bold" style="color: #2878BD;">BIENVENIDOS A EDUCATIONAL HARMONIE</span>
+        </div>
+        <button class="menu-btn" id="btn-gestion-usuarios">
+            <i class="fas fa-users menu-icon"></i>
+            GESTIÓN DE USUARIOS
+        </button>
+        <button class="menu-btn" id="btn-gestion-grupos">
+            <i class="fas fa-users-cog menu-icon"></i>
+            GESTIÓN DE GRUPOS
+        </button>
+        <button class="menu-btn" id="btn-historiales">
+            <i class="fas fa-history menu-icon"></i>
+            HISTORIALES
+        </button>
+        <button class="menu-btn" id="btn-notificaciones">
+            <i class="fas fa-bell menu-icon"></i>
+            NOTIFICACIONES
+        </button>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="content-area" id="content-area">
+        <!-- Content will load dynamically here -->
+    </div>
+
+    <!-- Profile Section -->
+    <div class="profile-section">
+        <div class="text-center">
+            <i class="fas fa-user-circle profile-icon"></i>
+            <p>ADMINISTRADOR</p>
+        </div>
+        <div class="logout">
+            <i class="fas fa-sign-out-alt"></i> CERRAR SESIÓN
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Funciones para gestionar las secciones
+    document.getElementById("btn-gestion-usuarios").addEventListener("click", function() {
+        document.getElementById("content-area").innerHTML = `
+        <h3>Gestión de Usuarios</h3>
+        <button class="btn btn-primary mb-3" id="btn-registrar-usuario">Registrar Usuario</button>
+        <h4>Listar Usuarios</h4>
+        <input type="text" id="buscar-usuario" class="form-control mb-3" placeholder="Buscar por nombres, apellidos, rol">
+        <ul id="lista-usuarios">
+            <!-- Los usuarios se cargan dinámicamente -->
+            <li>Usuario 1: Nombre Apellido (Rol)</li>
+            <li>Usuario 2: Nombre Apellido (Rol)</li>
+            <li>Usuario 3: Nombre Apellido (Rol)</li>
+        </ul>
+        `;
+
+        document.getElementById("btn-registrar-usuario").addEventListener("click", function() {
+            document.getElementById("content-area").innerHTML = `
+            <h3>Registrar Usuario</h3>
+            <form id="form-registrar-usuario">
+                <div class="mb-3">
+                    <label for="nombres" class="form-label">Nombres</label>
+                    <input type="text" class="form-control" id="nombres" required>
+                </div>
+                <div class="mb-3">
+                    <label for="apellidos" class="form-label">Apellidos</label>
+                    <input type="text" class="form-control" id="apellidos" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="usuario" class="form-label">Nombre de Usuario</label>
+                    <input type="text" class="form-control" id="usuario" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="rol" class="form-label">Rol</label>
+                    <select class="form-control" id="rol" required>
+                        <option value="docente">Docente</option>
+                        <option value="administrador">Administrador</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Registrar Usuario</button>
+            </form>
+            `;
+            document.getElementById("form-registrar-usuario").addEventListener("submit", async function(event) {
+                event.preventDefault();
+                // Aquí iría la lógica para registrar al usuario
+                alert("Usuario registrado con éxito");
+            });
+        });
+    });
+
+    document.getElementById("btn-gestion-grupos").addEventListener("click", function() {
+        document.getElementById("content-area").innerHTML = `
+        <h3>Gestión de Grupos</h3>
+        <button class="btn btn-primary mb-3" id="btn-crear-grupo">Crear Grupo</button>
+        <h4>Listar Grupos</h4>
+        <input type="text" id="buscar-grupo" class="form-control mb-3" placeholder="Buscar por nombre del grupo">
+        <ul id="lista-grupos">
+            <!-- Los grupos se cargan dinámicamente -->
+            <li>Grupo 1: Docente asignado y estudiantes...</li>
+            <li>Grupo 2: Docente asignado y estudiantes...</li>
+        </ul>
+        `;
+
+        document.getElementById("btn-crear-grupo").addEventListener("click", function() {
+            document.getElementById("content-area").innerHTML = `
+            <h3>Crear Grupo</h3>
+            <form id="form-crear-grupo">
+                <div class="mb-3">
+                    <label for="nombre-grupo" class="form-label">Nombre del Grupo</label>
+                    <input type="text" class="form-control" id="nombre-grupo" required>
+                </div>
+                <div class="mb-3">
+                    <label for="docente-asignado" class="form-label">Docente Asignado</label>
+                    <input type="text" class="form-control" id="docente-asignado" required>
+                </div>
+                <div class="mb-3">
+                    <label for="estudiantes" class="form-label">Estudiantes</label>
+                    <input type="text" class="form-control" id="estudiantes" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Crear Grupo</button>
+            </form>
+            `;
+            document.getElementById("form-crear-grupo").addEventListener("submit", async function(event) {
+                event.preventDefault();
+                // Aquí iría la lógica para crear el grupo
+                alert("Grupo creado con éxito");
+            });
+        });
+    });
+
+    document.getElementById("btn-historiales").addEventListener("click", function() {
+        document.getElementById("content-area").innerHTML = `
+            <h3>Historiales</h3>
+            <h4>Historial de Reportes</h4>
+            <input type="text" id="buscar-reportes" class="form-control mb-3" placeholder="Buscar reportes">
+            <ul id="lista-reportes">
+                <!-- Los reportes se cargan dinámicamente -->
+
+            </ul>
+
+            <h4>Historial de Quejas</h4>
+            <input type="text" id="buscar-quejas" class="form-control mb-3" placeholder="Buscar quejas">
+            <ul id="lista-quejas">
+                <!-- Las quejas se cargan dinámicamente -->
+                <li>Queja 1...</li>
+                <li>Queja 2...</li>
+            </ul>
+        `;
+    });
+
+    document.getElementById("btn-notificaciones").addEventListener("click", function() {
+        document.getElementById("content-area").innerHTML = `
+            <h3>Notificaciones</h3>
+            <form id="form-notificaciones">
+                <div class="mb-3">
+                    <label for="fecha-notificacion" class="form-label">Fecha</label>
+                    <input type="date" class="form-control" id="fecha-notificacion" required>
+                </div>
+                <div class="mb-3">
+                    <label for="asunto-notificacion" class="form-label">Asunto</label>
+                    <input type="text" class="form-control" id="asunto-notificacion" required>
+                </div>
+                <div class="mb-3">
+                    <label for="mensaje-notificacion" class="form-label">Mensaje</label>
+                    <textarea class="form-control" id="mensaje-notificacion" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="acudientes-notificacion" class="form-label">Seleccionar Acudientes</label>
+                    <select multiple class="form-control" id="acudientes-notificacion">
+                        <option value="acudiente1">Acudiente 1</option>
+                        <option value="acudiente2">Acudiente 2</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar Notificación</button>
+            </form>
+        `;
+    });
+
+    // Cierre de sesión
+    document.querySelector(".logout").addEventListener("click", function() {
+        alert("Cerrando sesión...");
+    });
+</script>
+</body>
+</html>

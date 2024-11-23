@@ -1,0 +1,8 @@
+<root>
+    <item name='sun.launcher.LauncherHelper'>
+        <annotation name='java.lang.Deprecated'/>
+    </item>
+    <item name='sun.launcher.SecuritySettings'>
+        <annotation name='java.lang.Deprecated'/>
+    </item>
+</root>

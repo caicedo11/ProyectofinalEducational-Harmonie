@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Acudiente - Educational Harmonie</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #C6DFF3;
+            color: #143C5F;
+            position: relative;
+        }
+        .header-bar {
+            background-color: #143C5F;
+            color: white;
+            padding: 10px 0;
+        }
+        .container-fluid {
+            text-align: center;
+            padding: 0;
+        }
+        .sidebar {
+            background-color: white;
+            width: 250px;
+            padding: 20px;
+            border-right: 1px solid #2878BD;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+        }
+        .sidebar .menu-btn, .sidebar .menu-item {
+            width: 100%;
+            text-align: left;
+            font-size: 16px;
+            color: #143C5F;
+            padding: 10px 15px;
+            border: 1px solid #2878BD;
+            background-color: #C6DFF3;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+        .sidebar .menu-btn:hover, .sidebar .menu-item:hover {
+            background-color: #70B0E0;
+            color: white;
+        }
+        .sidebar .menu-icon {
+            font-size: 20px;
+        }
+        .content-area {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        .profile-section {
+            text-align: right;
+            padding: 20px;
+        }
+        .profile-section .profile-icon {
+            font-size: 30px;
+            color: #143C5F;
+        }
+        .profile-section p {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #2878BD;
+        }
+        .logout {
+            text-align: center;
+            padding: 20px;
+            cursor: pointer;
+            color: #143C5F;
+        }
+        .logout:hover {
+            color: #2878BD;
+        }
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+            opacity: 0.2;
+            pointer-events: none;
+        }
+        .watermark img {
+            max-width: 80%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="watermark">
+    <img src="../static/img/logo.JPG.jpg" alt="Logo de Educational Harmonie" class="logo">
+</div>
+
+<div class="header-bar">
+    <div class="container-fluid">
+        <h1>PANEL ACUDIENTE</h1>
+    </div>
+</div>
+
+<div class="d-flex">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo-container text-center mb-4">
+            <div class="logo-placeholder" style="background-color: #70B0E0; color: white; padding: 20px;"></div>
+            <span class="fw-bold" style="color: #2878BD;">BIENVENIDOS A EDUCATIONAL HARMONIE</span>
+        </div>
+        <button class="menu-btn" id="btn-mi-hijos">
+            <i class="fas fa-child menu-icon"></i>
+            MI/S HIJOS
+        </button>
+        <button class="menu-btn" id="btn-quejas">
+            <i class="fas fa-comment-dots menu-icon"></i>
+            QUEJAS
+        </button>
+        <button class="menu-btn" id="btn-historiales">
+            <i class="fas fa-history menu-icon"></i>
+            HISTORIALES
+        </button>
+        <button class="menu-btn" id="btn-notificaciones">
+            <i class="fas fa-bell menu-icon"></i>
+            NOTIFICACIONES
+        </button>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="content-area" id="content-area">
+        <!-- Content will load dynamically here -->
+    </div>
+
+    <!-- Profile Section -->
+    <div class="profile-section">
+        <div class="text-center">
+            <i class="fas fa-user-circle profile-icon"></i>
+            <p>ACUDIENTE</p>
+        </div>
+        <div class="logout">
+            <i class="fas fa-sign-out-alt"></i> CERRAR SESIÓN
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Funciones para gestionar las secciones
+    document.getElementById("btn-mi-hijos").addEventListener("click", function() {
+        document.getElementById("content-area").innerHTML = `
+            <h3>Mi(s) Hijos</h3>
+            <input type="text" id="buscar-estudiantes" class="form-control mb-3" placeholder="Buscar por nombres, apellidos">
+            <ul id="lista-estudiantes">
+                <!-- Los estudiantes se cargan dinámicamente -->
+                <li>Estudiante 1: Nombre Apellido</li>
+                <li>Estudiante 2: Nombre Apellido</li>
+            </ul>
+        `;
+    });
+
+    document.getElementById("btn-quejas").addEventListener("click", function() {
+        document.getElementById("content-area").innerHTML = `
+            <h3>Crear Queja</h3>
+            <form id="form-crear-queja">
+                <div class="mb-3">
+                    <label for="docente-queja" class="form-label">Docente</label>
+                    <select class="form-control" id="docente-queja" required>
+                        <option value="">Selecciona un docente</option>
+                        <option value="docente1">Docente 1</option>
+                        <option value="docente2">Docente 2</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="fecha-queja" class="form-label">Fecha</label>
+                    <input type="date" class="form-control" id="fecha-queja" required>
+                </div>
+                <div class="mb-3">
+                    <label for="asunto-queja" class="form-label">Asunto</label>
+                    <input type="text" class="form-control" id="asunto-queja" required>
+                </div>
+                <div class="mb-3">
+                    <label for="mensaje-queja" class="form-label">Mensaje</label>
+                    <textarea class="form-control" id="mensaje-queja" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar Queja</button>
+            </form>
+        `;
+        document.getElementById("form-crear-queja").addEventListener("submit", function(event) {
+            event.preventDefault();
+            // Aquí iría la lógica para crear la queja
+            alert("Queja enviada con éxito");
+        });
+    });
+
+    document.getElementById("btn-historiales").addEventListener("click", function() {
+        document.getElementById("content-area").innerHTML = `
+            <h3>Historiales</h3>
+            <h4>Historial de Reportes</h4>
+            <input type="text" id="buscar-reportes" class="form-control mb-3" placeholder="Buscar reportes">
+            <ul id="lista-reportes">
+                <!-- Los reportes se cargan dinámicamente -->
+                <li>Reporte 1...</li>
+                <li>Reporte 2...</li>
+            </ul>
+
+            <h4>Historial de Quejas</h4>
+            <input type="text" id="buscar-quejas" class="form-control mb-3" placeholder="Buscar quejas">
+            <ul id="lista-quejas">
+                <!-- Las quejas se cargan dinámicamente -->
+                <li>Queja 1...</li>
+                <li>Queja 2...</li>
+            </ul>
+        `;
+    });
+
+    document.getElementById("btn-notificaciones").addEventListener("click", function() {
+        document.getElementById("content-area").innerHTML = `
+            <h3>Notificaciones</h3>
+            <ul id="lista-notificaciones">
+                <!-- Las notificaciones se cargan dinámicamente -->
+                <li>
+                    <span>Notificación 1</span>
+                    <button class="btn btn-success btn-sm" onclick="marcarComoLeido(this)">Marcar como leído</button>
+                </li>
+                <li>
+                    <span>Notificación 2</span>
+                    <button class="btn btn-success btn-sm" onclick="marcarComoLeido(this)">Marcar como leído</button>
+                </li>
+            </ul>
+        `;
+    });
+
+    function marcarComoLeido(btn) {
+        btn.classList.remove("btn-success");
+        btn.classList.add("btn-secondary");
+        btn.textContent = "Leído";
+    }
+
+    // Cierre de sesión
+    document.querySelector(".logout").addEventListener("click", function() {
+        alert("Cerrando sesión...");
+    });
+</script>
+</body>
+</html>

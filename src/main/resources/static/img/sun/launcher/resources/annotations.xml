@@ -1,0 +1,6 @@
+<root>
+    <item name='sun.launcher.resources.launcher java.lang.Object[][] getContents()'>
+        <annotation name='java.lang.Deprecated'/>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+</root>
